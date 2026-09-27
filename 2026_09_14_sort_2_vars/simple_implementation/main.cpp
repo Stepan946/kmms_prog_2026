@@ -1,47 +1,47 @@
 #include <iostream>
 
 void my_sort(int *arr, const int size);
+void print_array(const int *arr, const int size, const char *message);
 
 int main() {
     int size = 0;
     std::cout << "Введите размер массива: ";
-    std::cin >> size; // Считываем размер
+    std::cin >> size;
 
-    // Создаем массив нужного размера
+    if (size <= 0) {
+        std::cout << "Ошибка: размер массива должен быть больше 0!" << std::endl;
+        return 1;
+    }
+
     int *arr = new int[size];
 
-    // Заполняем массив числами с клавиатуры
-    std::cout << "Введите элементы массива:" << std::endl;
+    std::cout << "Введите " << size << " элементов массива:" << std::endl;
     for (int i = 0; i < size; ++i) {
+        std::cout << "arr[" << i << "] = ";
         std::cin >> arr[i];
     }
 
-    // Выводим исходный массив
-    std::cout << "Первоначальный массив: ";
-    for (int i = 0; i < size; ++i) {
-        std::cout << arr[i] << " ";
-    }
-    std::cout << std::endl;
+    print_array(arr, size, "\nПервоначальный массив: ");
 
-    // Вызываем функцию сортировки
     my_sort(arr, size);
 
-    // Выводим отсортированный массив
-    std::cout << "Отсортированный массив: ";
-    for (int i = 0; i < size; ++i) {
-        std::cout << arr[i] << " ";
-    }
-    std::cout << std::endl;
+    print_array(arr, size, "Отсортированный массив: ");
 
-    delete[] arr; // Освобождаем память
+    delete[] arr;
     return 0;
 }
 
-// Функция сортировки "Пузырьком"
+void print_array(const int *arr, const int size, const char *message) {
+    std::cout << message;
+    for (int i = 0; i < size; ++i) {
+        std::cout << arr[i] << " ";
+    }
+    std::cout << std::endl;
+}
+
 void my_sort(int *arr, const int size) {
     for (int i = 0; i < size - 1; ++i) {
         for (int j = 0; j < size - i - 1; ++j) {
-            // Если левый элемент больше правого — меняем их местами
             if (arr[j] > arr[j + 1]) {
                 int temp = arr[j];
                 arr[j] = arr[j + 1];
