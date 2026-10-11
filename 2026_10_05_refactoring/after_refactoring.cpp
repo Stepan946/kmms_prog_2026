@@ -5,22 +5,22 @@ void print_array(const char* const comment, const double* arr, const int n);
 
 int main() {
     static const int ARRAY_SIZE = 10;
-
     double arr[ARRAY_SIZE];
 
+    std::cout << "Надо ввести массив из 10-и элементов." << std::endl;
     for (int i = 0; i < ARRAY_SIZE; i++) {
-        std::cout << "Введите " << i << " элемент: ";
+        std::cout << "Введите " << i + 1 << "-й элемент: ";
         std::cin >> arr[i];
     }
 
     print_array("Введенный массив: ", arr, ARRAY_SIZE);
 
-    bool is_increasing = is_sequence_increasing(arr, ARRAY_SIZE);
+    const bool is_increasing = is_sequence_increasing(arr, ARRAY_SIZE);
 
     if (is_increasing) {
-        std::cout << "Последовательность возрастающая" << std::endl;
+        std::cout << "Последовательность возрастающая." << std::endl;
     } else {
-        std::cout << "Последовательность не возрастающая" << std::endl;
+        std::cout << "Последовательность не возрастающая." << std::endl;
     }
 
     return 0;
@@ -28,9 +28,7 @@ int main() {
 
 bool is_sequence_increasing(const double* arr, const int n) {
     for (int i = 0; i < n - 1; i++) {
-        bool is_order_violated = (arr[i] > arr[i + 1]);
-
-        if (is_order_violated) {
+        if (arr[i] > arr[i + 1]) {
             return false;
         }
     }
